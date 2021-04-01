@@ -24,7 +24,7 @@ import seedu.address.testutil.PersonBuilder;
 public class ClearCommandTest {
 
     @Test
-    public void execute_emptyAddressBook_clear_person_all_success() {
+    public void execute_emptyAddressBook_clearPersonAll() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
@@ -33,7 +33,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_clear_person_success() {
+    public void execute_nonEmptyAddressBook_clearPerson() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
@@ -43,7 +43,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_clear_one_person_selected_success() {
+    public void execute_nonEmptyAddressBook_clearOnePersonSelected() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         showPersonAtIndex(model, INDEX_THIRD_PERSON);
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -56,7 +56,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_clear_all_person_selected_success() {
+    public void execute_nonEmptyAddressBook_clearAllPersonSelected() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.setAddressBook(new AddressBook());
@@ -66,7 +66,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_clear_all_meeting_success() {
+    public void execute_nonEmptyAddressBook_clearAllMeeting() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         Person personToSchedule;
@@ -90,26 +90,26 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_clear_selected_meeting_success() {
+    public void execute_nonEmptyAddressBook_clearSelectedMeeting() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         Person personToSchedule;
         PersonBuilder personInList;
         Person editedPerson;
 
-        String past_meeting = "Past @ " +
-                LocalDateTime.MIN.withYear(1900).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        String future_meeting = "Future @ " +
-                LocalDateTime.MAX.withYear(9999).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        String pastMeeting = "Past @ "
+                + LocalDateTime.MIN.withYear(1900).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        String futureMeeting = "Future @ "
+                + LocalDateTime.MAX.withYear(9999).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
         personToSchedule = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
         personInList = new PersonBuilder(personToSchedule);
-        editedPerson = personInList.withMeeting(past_meeting).build();
+        editedPerson = personInList.withMeeting(pastMeeting).build();
         model.setPerson(personToSchedule, editedPerson);
 
         personToSchedule = model.getFilteredPersonList().get(INDEX_THIRD_PERSON.getZeroBased());
         personInList = new PersonBuilder(personToSchedule);
-        editedPerson = personInList.withMeeting(future_meeting).build();
+        editedPerson = personInList.withMeeting(futureMeeting).build();
         model.setPerson(personToSchedule, editedPerson);
 
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());

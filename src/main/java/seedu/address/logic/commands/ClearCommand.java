@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -23,11 +22,11 @@ import seedu.address.model.person.Person;
 public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears the information of your choice\n" +
-            "clear person all -- removes all people\n" +
-            "clear person selected -- removes displayed people\n" +
-            "clear meeting all -- unschedules all meetings\n" +
-            "clear meeting expired -- removes expired meetings";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears the information of your choice\n"
+            + "clear person all -- removes all people\n"
+            + "clear person selected -- removes displayed people\n"
+            + "clear meeting all -- unschedules all meetings\n"
+            + "clear meeting expired -- removes expired meetings";
 
 
     public static final String MESSAGE_ALL_PERSON_SUCCESS = "Address book has been cleared!";
@@ -70,12 +69,12 @@ public class ClearCommand extends Command {
             case ALLMEETING:
                 meetingList.forEach(person -> model.setPerson(person, person.setMeeting(Optional.empty())));
                 return new CommandResult(MESSAGE_EXPIRED_MEETING_SUCCESS);
+            default:
+                throw new NoSuchElementException();
             }
         } catch (NoSuchElementException ex) {
             throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
-
-        throw new CommandException(MESSAGE_FAILURE);
     }
 
     public enum ClearType {
@@ -90,6 +89,9 @@ public class ClearCommand extends Command {
             this.value = value;
         }
 
+        /**
+         * Wraps the input string into an enum
+         */
         public static ClearType wrap(String string) throws NoSuchElementException {
             return Arrays.stream(ClearType.values())
                     .filter(x -> x.value.equals(string.toLowerCase()))
