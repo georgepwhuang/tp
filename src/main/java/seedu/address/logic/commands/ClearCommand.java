@@ -31,9 +31,9 @@ public class ClearCommand extends Command {
 
 
     public static final String MESSAGE_ALL_PERSON_SUCCESS = "Address book has been cleared!";
-    public static final String MESSAGE_SELECTED_PERSON_SUCCESS = "Address book has been cleared!";
-    public static final String MESSAGE_ALL_MEETING_SUCCESS = "Address book has been cleared!";
-    public static final String MESSAGE_EXPIRED_MEETING_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SELECTED_PERSON_SUCCESS = "Selected people have been removed";
+    public static final String MESSAGE_ALL_MEETING_SUCCESS = "All meetings are removed!";
+    public static final String MESSAGE_EXPIRED_MEETING_SUCCESS = "Expired meetings are removed!";
     public static final String MESSAGE_FAILURE = "Encountered error in clearing address book";
 
     private final String args;

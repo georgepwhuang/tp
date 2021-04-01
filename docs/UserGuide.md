@@ -60,7 +60,7 @@ Action                            | Format
 ----------------------------------|------------------------------------------------------------------------------------
 **Add a client**                  | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS g/GENDER b/BIRTHDATE [t/TAG]...`
 **Add or remove insurance plans** | `plan INDEX i/PLAN_NAME $PREMIUM` (add), `plan INDEX i/remove PLAN_INDEX` (remove)
-**Clear all clients**             | `clear`
+**Clear clients and meetings**    | `clear CLEAR_TYPE`
 **Delete a client**               | `delete INDEX`
 **Edit a client**                 | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [g/GENDER] [b/BIRTHDATE] [t/TAG]...`
 **Exit Link.me**                  | `exit`
@@ -189,12 +189,21 @@ Examples:
 * `find Betsy` followed by `delete 1` deletes the 1st client in the results of the `find` command.
 
 
-### Clearing all clients : `clear`
+### Clearing clients or meetings : `clear`
 
-You can remove all clients from Link.me.
+With clear, you can quickly remove clients and meetings.
 
-Format: `clear`
+Format: `clear CLEAR_TYPE`
 
+Clear is offered in four flavors:
+
+* `clear person all` removes everything from Link.me, allowing you to start over.
+* `clear person selected` removes all the clients that are displayed on the client list. This can be used with `find` and`filter` to remove various clients at once. Meetings that are scheduled with these clients are also removed.
+* `clear meeting all` unschedules every meeting scheduled with every client.
+* `clear meeting expired` removes every meeting before the current time.
+
+Examples:
+* `find Alex` then `clear person selected` removes every client whose name is Alex.
 
 ### Adding or removing insurance plans of a client : `plan`
 
